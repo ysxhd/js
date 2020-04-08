@@ -16,10 +16,10 @@ module.exports = {
         new HtmlWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
-    devServer: {
-        contentBase: './dist',
-        hot: true
-    },
+    // devServer: {
+    //     contentBase: './dist',
+    //     hot: true
+    // },
     module: {
         rules: [
             {
@@ -28,23 +28,14 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
-            {
-                test: /.less$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'less-loader'
-                ]
-            },
-            {
                 test: /.(jpg|png|gif|jpeg)$/,
-                use: 'file-loader'
+                use: [{
+                    loader:'url-loader',
+                    options: {
+                        limit:160000,
+                        name: 'imgs/[name].[hash].[ext]'
+                    }
+                }]
             }
         ]
     }
